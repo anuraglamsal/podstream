@@ -9,10 +9,10 @@ app = Flask(__name__) #__name__ returns the name of the module--here
                       #Flask uses the name of the module to figure out where
                       #all the things like templates, static files, etc.
                       #of the application are stored. It basically sets up
-                      #our app. How it does it is black to me.
+                      #our app. How it does it is black box to me.
 
 @app.route("/") #This creates a path. Here particularly, if there is
-                #nothing written after '/' in the URL, the webpage under
+                #nothing written after '/' in the URL, the function under
                 #this is returned. It may be '/home' or '/about' or anything
                 #that you want. Flask uses decorators for this. Again,
                 #black box.
