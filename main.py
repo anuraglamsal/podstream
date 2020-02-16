@@ -4,7 +4,7 @@ app = Flask(__name__) #__name__ returns the name of the module--here
                       #In the module itself however, it returns "__main__".
                       #You can use this property to prevent your code
                       #from running in other modules i.e. indicating that
-                      #the particular code is the "main code" like the creating
+                      #the particular code is the "main code" like creating
                       #the main function in C. In this particular scenario,
                       #Flask uses the name of the module to figure out where
                       #all the things like templates, static files, etc.

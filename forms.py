@@ -27,7 +27,7 @@ class SignUp(FlaskForm): #In wtforms, if we want to use the resources
                                           #For that, we create an object of the
                                           #class 'StringField' that we imported.
                                           #Now, we need to pass the required
-                                          #values  for attributes in that class.
+                                          #values for attributes in that class.
 
                                           #'First Name' inside the brackets is
                                           #the label of the String Field
