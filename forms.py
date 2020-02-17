@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 
                                 #Used to import classes for the boxes
                                 #in forms to write the required info in or
@@ -15,6 +15,11 @@ from wtforms import StringField, PasswordField, SubmitField
 
                                 # 3. SubmitField is used to generate the submit
                                 # button.
+
+                                # 4. BooleanField is used to generate a
+                                # checkbox. If you check it, the value is
+                                # True. If it is unchecked, the value is False.
+                                # The default value is False i.e unchecked.
 
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
@@ -113,10 +118,30 @@ class SignUp(FlaskForm): #In wtforms, if we want to use the resources
                                         #in the 'Password' password field
                                         #that we've made above.
 
-    Submit = SubmitField('Sign Up!')
+    Submit = SubmitField('Sign Up')
 
                                         #Here, we have used the SubmitField
                                         #class to generate the 'Submit'
                                         #button used to submit the entered
                                         #values and make them ready for
                                         #validation.
+
+class Login(FlaskForm): #Here, we are creating another class that inherits
+                        #from the FlaskForm class imported above for our
+                        #login form. A login form typically requires a Email
+                        #field, a password field and a submit field.
+                        #A 'Remember me' tickbox is also typically used.
+
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    Password = PasswordField('Password', validators=[DataRequired(),
+                                                     Length(min=9, max=20)])
+    Remember = BooleanField('Remember me')
+
+                                        #Added a 'Remember me' checkbox.
+                                        #We can use this to automatically
+                                        #open our logged in page without
+                                        #actually logging in every time. For
+                                        #that, we need to write extra code
+                                        #which we'll do in main and html.
+
+    Submit = SubmitField('Sign In')
