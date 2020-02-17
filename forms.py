@@ -23,7 +23,7 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField
 
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
-                                        #Here, we are mporting classes for
+                                        #Here, we are importing classes for
                                         #validation. Validators are used
                                         #to set conditions in our fields and
                                         #check if they are followed.
@@ -40,7 +40,7 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo
                                         # accuracy in terms of structure of
                                         # the given email.
 
-                                        # 4. The EqualTo validtor checks if
+                                        # 4. The EqualTo validator checks if
                                         # the value entered in the field is
                                         # equal to the value entered in some
                                         # other field.
@@ -56,8 +56,8 @@ class SignUp(FlaskForm): #In wtforms, if we want to use the resources
 
                                     #As our signup form should contain
                                     #a field to write 'First Name' in
-                                    #, we create a string field for that.
-                                    #For that, we create an object of the
+                                    #, we create a string field for that
+                                    #i.e. we create an object of the
                                     #class 'StringField' that we imported.
                                     #Now, we need to pass the required
                                     #values for attributes in that class.
@@ -75,14 +75,14 @@ class SignUp(FlaskForm): #In wtforms, if we want to use the resources
                                     #required for validation. It is also
                                     #an attribute of the StringField class.
                                     #I have explained the use of all the
-                                    #validator classes used in the import
+                                    #validator classes I've used in the import
                                     #section of the code.
 
     MiddleName = StringField('Middle Name (if any)')
 
                                         #As there might not be a
                                         #middle name, we are not
-                                        #using any validators here.
+                                        #using any validator here.
 
     LastName = StringField('Last Name', validators=[DataRequired(),
                                                     Length(min=1, max=50)])
