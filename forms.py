@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 
-                                #Used to import classes for the boxes
-                                #in forms to write the required info in or
-                                #buttons to submit.
+                                #Used to import classes that provide fields
+                                #to do stuff like text boxes, submit buttons,
+                                #check boxes, etc.
 
                                 # 1. StringField is for info that is written
                                 # as strings like names and such.
