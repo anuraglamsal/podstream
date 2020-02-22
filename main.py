@@ -39,9 +39,10 @@ app.config['SECRET_KEY'] = 'CLFA58C61A'
                 #Thus, a very strong secret-key is configured such that data
                 #is not altered without the volition of the actual client.
 
-                #Here, the kind of data we are talking about is evidently
-                #the data that is not supposed to be changed--like through some
-                #sort of editing system on the web page itself.
+                #Here, the kind of data we are talking about is especially 
+                #the data that is not supposed to be changed; we're not talking
+                #about data like a profile picture for example that is supposed
+                #to have an option to change. 
 
 @app.route("/")
 
