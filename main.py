@@ -24,25 +24,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'CLFA58C61A'
 
                 # Session: Session is the time interval from when a client logs
-                # into a server till they log out of it.
-
-                #Now, to start a session, the server needs to send
-                #user-specific data to the browser. That data and the secret-
-                #key are mashed up using a cryptographic algorithm to
-                #create a signature string that makes the data "official". Now,
-                #that official data is sent to the browser. Anyone can access
-                #it, but to change it, you need the signature string. To
-                #figure out the signature string, you need both the secret-key
-                #and the data. As the secret-key itself is never sent along
-                #with the data, someone who is trying to make changes to some
-                #data can't do it until they figure out the secret-key.
-                #Thus, a very strong secret-key is configured such that data
-                #is not altered without the volition of the actual client.
-
-                #Here, the kind of data we are talking about is especially 
-                #the data that is not supposed to be changed; we're not talking
-                #about data like a profile picture for example that is supposed
-                #to have an option to change. 
+                # into a server till they log out of it. 
 
 @app.route("/")
 
