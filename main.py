@@ -23,8 +23,8 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'CLFA58C61A'
 
-                # Session: Session is the time interval from when a client logs
-                # into a server till they log out of it. 
+                #Go to this link for information regarding the use of this
+                #secret key - https://imgur.com/a/t3bnRj5
 
 @app.route("/")
 
