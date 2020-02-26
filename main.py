@@ -43,3 +43,13 @@ def signup():   #Now, everything that you need to do for that particular
                 #Now, we can send this object to our html to work with
                 #fields and labels, manipulate data entered in the fields,
                 #use validators, etc.
+
+  return render_template('index.hmtl', up=up)
+
+                #Here, we use the 'render_template' function to provide the
+                #name of the html page pertaining to this path that it will
+                #search in the 'templates' folder to send to the browser when
+                #a user tries to access the path. And the object 'up' that we
+                #want to use in the html to access the entities made in the
+                #'SignUp' class in 'forms.py' is sent through render_template
+                #too.

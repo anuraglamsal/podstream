@@ -1,0 +1,42 @@
+<html>
+<head>
+  <title> Sign Up! </title>
+</head>
+<body>
+  <form action="" method="POST">
+
+    <!-- The form tag initializes a form by using the "action" attribute
+         to specify the path that the form should be submitted to (here, we
+         leave it empty because we want to send the submitted data to the same
+         path that it was rendered through i.e. the '/' path). We generally
+         use "{{ url_for('handle_data') }}" to do that by specifying the
+         name of the function of the said path in the "url_for('functionname')"
+         function.
+
+         Along with "action", the "method" attribute is used to specify the
+         type of http request that is to be made to the server. For example,
+         search bars aren't as confidential as password bars. Even if the
+         information that we type in the search bar is relatively explicitely
+         seen--for example in the url bar--when a request is made, it's not that
+         big of a deal compared to passwords. Thus, for cases like search bars,
+         we tend to use the "GET" method as it has its own little perks that
+         are useful that we wouldn't get with other methods. Now, if we are
+         working with a form that has a password bar, we evidently don't want
+         our password to be relatively explicitely seen like in the "GET" method
+         when making a request. Thus, for that, the "POST" method is used.
+
+         In the usage of "GET", there is an implication that the request has
+         been made to retrieve a page--like entering something in the search bar
+         of a website and submitting it to get the search-specific page. In
+         "POST", there is an implication that some sort of confidential
+         information has been sent to the server to store or to tally with some
+         already stored information for some purpose.
+
+         Go to this link for a definitive guide :
+         https://blog.teamtreehouse.com/the-definitive-guide-to-get-vs-post -->
+
+
+
+  </form>
+</body>
+</html>
