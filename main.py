@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from forms import SignUp, Login
 
-                #Here, we have imported our forms.py module to actually use
+                #Here, we have imported our 'forms.py' module to actually use
                 #the features of wtforms and the entities initialized in that
                 #module by creating objects of the specific classes in this
                 #module.
@@ -37,12 +37,12 @@ app.config['SECRET_KEY'] = 'CLFA58C61A'
 def signup():   #Now, everything that you need to do for that particular
                 #path of the web app is done under this function.
 
-  up = SignUp() #As we have imported the forms.py module in this module, we
-                #create an object of the SignUp class here to be able
-                #to access all the entities pertaining to that class.
-                #Now, we can send this object to our html to work with
-                #fields and labels, manipulate data entered in the fields,
-                #use validators, etc.
+  up = SignUp() #As we have imported the 'forms.py' module in this module, we
+                #create an object of the 'SignUp' class here to be able
+                #to access all the direct or indirect attributes pertaining 
+                #to that class. Now, we can send this object to our html
+                #to work with fields and labels, manipulate submitted
+                #data, use validators, etc.
 
   return render_template('index.hmtl', up=up)
 
@@ -50,6 +50,6 @@ def signup():   #Now, everything that you need to do for that particular
                 #name of the html page pertaining to this path that it will
                 #search in the 'templates' folder to send to the browser when
                 #a user tries to access the path. And the object 'up' that we
-                #want to use in the html to access the entities made in the
+                #want to use in the html to access the attributes made in the
                 #'SignUp' class in 'forms.py' is sent through render_template
                 #too.
