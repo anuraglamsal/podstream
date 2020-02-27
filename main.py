@@ -39,7 +39,7 @@ def signup():   #Now, everything that you need to do for that particular
 
   up = SignUp() #As we have imported the 'forms.py' module in this module, we
                 #create an object of the 'SignUp' class here to be able
-                #to access all the direct or indirect attributes pertaining 
+                #to access all the direct or indirect attributes pertaining
                 #to that class. Now, we can send this object to our html
                 #to work with fields and labels, manipulate submitted
                 #data, use validators, etc.
