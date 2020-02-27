@@ -44,12 +44,20 @@ def signup():   #Now, everything that you need to do for that particular
                 #fields and labels, manipulate data entered in the fields,
                 #use validators, etc.
 
-  return render_template('index.hmtl', up=up)
+  return render_template('index.html', up=up)
 
                 #Here, we use the 'render_template' function to provide the
                 #name of the html page pertaining to this path that it will
                 #search in the 'templates' folder to send to the browser when
-                #a user tries to access the path. And the object 'up' that we
-                #want to use in the html to access the entities made in the
-                #'SignUp' class in 'forms.py' is sent through render_template
-                #too.
+                #a user tries to access the path. The 'up=up' is used to
+                #notify the template engine i.e 'Jinja' that this 'up' object
+                #has been used in the html and it requires the interpretation
+                #of the engine to actually work on the html.
+
+                #Jinja is a template engine that gives us the ability to use
+                #Python commands in html. We can use variables that we declared
+                #in our Python program and manipulate them using commands like
+                #"for" statetments, "if" statements, etc. in our html with the
+                #aid of Jinja. It has its own syntax structure that we must
+                #follow. This is how we are able to use the fields and
+                #such that we declared in 'forms.py' in our html.

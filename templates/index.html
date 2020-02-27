@@ -3,15 +3,19 @@
   <title> Sign Up! </title>
 </head>
 <body>
-  <form action="" method="POST">
+  <form action="" method="GET">
 
     <!-- The form tag initializes a form by using the "action" attribute
          to specify the path that the form should be submitted to (here, we
          leave it empty because we want to send the submitted data to the same
          path that it was rendered through i.e. the '/' path). We generally
-         use "{{ url_for('handle_data') }}" to do that by specifying the
+         use {# "{{ url_for('handle_data') }}" #} to do that by specifying the
          name of the function of the said path in the "url_for('functionname')"
          function.
+
+         P.S. Use {# comment #} to comment Jinja commands. Jinja reads
+         stuff inside html comments for some reasons if it is syntactically
+         a Jinja command.
 
          Along with "action", the "method" attribute is used to specify the
          type of http request that is to be made to the server. For example,
@@ -35,7 +39,26 @@
          Go to this link for a definitive guide :
          https://blog.teamtreehouse.com/the-definitive-guide-to-get-vs-post -->
 
+       {{ up.hidden_tag() }}
 
+    <!-- This is used to add a csrf token to the form. Watch this video
+         to understand what a csrf token is:
+         https://www.youtube.com/watch?v=vRBihr41JTo
+
+         Here, we use double curly brackets to enclose this function as
+         that is the syntax that has been set for Jinja to recognize. -->
+
+       {{ up.FirstName.label }}
+       {{ up.FirstName }}
+
+    <!-- As 'FirstName' is an attribute of the 'SignUp' class, we
+         call it here by using 'up.FirstName' command where 'up' is the
+         object that we created back in 'main.py' of the 'SignUp' class. As
+        'FirstName' itself is an object of the 'StringField' class, we have
+         basically called our desired field here. 'up.FirstName.label' brings
+         out the label that we sent as a value of an attribute of the
+         'StringField' class back in 'main.py' pertaining to our 'FirstName'
+         object. -->
 
   </form>
 </body>
