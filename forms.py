@@ -45,26 +45,26 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo
                          # equal to the value entered in some
                          # other field.
 
-class SignUp(FlaskForm): #In wtforms, all the magic that gives 
-                         #us the ability to access the data 
+class SignUp(FlaskForm): #In wtforms, all the magic that gives
+                         #us the ability to access the data
                          #entered on the fields and submitted
-                         #using the submit button is done 
-                         #internally, which is essentially just 
-                         #black box. This internal mechanism 
+                         #using the submit button is done
+                         #internally, which is essentially just
+                         #black box. This internal mechanism
                          #is dependent upon us making a unique
-                         #class for every form such that each 
+                         #class for every form such that each
                          #class consists of its own fields and
-                         #buttons. This is why, we cannot use 
-                         #the same submit button for both login 
-                         #and sign-up, for example. This 
+                         #buttons. This is why, we cannot use
+                         #the same submit button for both login
+                         #and sign-up, for example. This
                          #mechanism is also contingent upon us
                          #inheriting the 'FlaskForm' class.
-                        
+
                          #Below, we define the attributes of the
                          #class. We define them straightforwardly
                          #as they are evidently going to be
                          #constant for every user.
-                    
+
     FirstName = StringField('First Name', validators=[DataRequired(),
                                                         Length(min=1, max=50)])
 
@@ -120,7 +120,8 @@ class SignUp(FlaskForm): #In wtforms, all the magic that gives
                          #Now, the field is suited to
                          #enter passwords.
 
-    ConfirmPassword = PasswordField('Password', validators=[DataRequired(),
+    ConfirmPassword = PasswordField('Confirm Password',
+                                                  validators=[DataRequired(),
                                                   Length(min=9, max=20),
                                                   EqualTo('Password')])
 

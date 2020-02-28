@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, flash
 from forms import SignUp, Login
 
                 #Here, we have imported our 'forms.py' module to actually use
@@ -26,13 +26,19 @@ app.config['SECRET_KEY'] = 'CLFA58C61A'
                 #Go to this link for information regarding the use of this
                 #secret key - https://imgur.com/a/t3bnRj5
 
-@app.route("/")
+@app.route("/", methods = ['GET', 'POST'])
 
                 #This creates a path. Here particularly, if there is
                 #nothing written after '/' in the URL, the function under
                 #this is returned. It may be '/home' or '/about' or anything
                 #that you want. Flask uses decorators for this. Again,
                 #black box.
+
+                #We also mention the methods of requests here as the same path
+                #can receive requests made with different request methods.
+                #Here, we write 'GET' for when a user initially requests this
+                #path to view the form. We write 'POST' for when a user makes
+                #request to submit their filled form.
 
 def signup():   #Now, everything that you need to do for that particular
                 #path of the web app is done under this function.
@@ -43,6 +49,30 @@ def signup():   #Now, everything that you need to do for that particular
                 #to that class. Now, we can send this object to our html
                 #to work with fields and labels, manipulate submitted
                 #data, use validators, etc.
+
+  if up.validate_on_submit():
+
+                #validate_on_submit() is a function that checks if the data
+                #entered by the user is valid according to the conditions that
+                #we set on 'forms.py'. It is a function of the 'FlaskForm'
+                #class that we inherited in our 'SignUp' class.
+
+           flash(f'Account for {up.Username.data} has been created.')
+
+                #The 'flash' function is used to return a string for one
+                #request only i.e. after the string is seen once on a page,
+                #we don't see it if we refresh it or specifically, we don't
+                #see it if another request is made. This is especially useful
+                #if we want to tell the user about their success or failure in
+                #regards to the creation of their account on a pre-existing page
+                #rather than creating a completely different page for it. But
+                #if we use a pre-existing page whose purpose is not to only
+                #show the message of success or failure, we want it to be a one
+                #time thing only--thus, the usage of 'flash'.
+
+                #Right now, we have flashed the messages in this path i.e. in
+                #'index.html'. Thus, we haven't redirected the user to any other
+                #path here. But that will change later.
 
   return render_template('index.html', up=up)
 

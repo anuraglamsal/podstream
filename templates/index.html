@@ -3,7 +3,7 @@
   <title> Sign Up! </title>
 </head>
 <body>
-  <form action="" method="GET">
+  <form action="" method="POST">
 
     <!-- The form tag initializes a form by using the "action" attribute
          to specify the path that the form should be submitted to (here, we
@@ -59,6 +59,57 @@
          out the label that we sent as a value of an attribute of the
          'StringField' class back in 'main.py' pertaining to our 'FirstName'
          object. -->
+
+       {{ up.MiddleName.label }}
+       {{ up.MiddleName }}
+
+    <!-- Doing the same as above for "MiddleName". -->
+
+       {{ up.LastName.label }}
+       {{ up.LastName }}
+
+       {{ up.email.label }}
+       {{ up.email }}
+
+       {{ up.Username.label }}
+       {{ up.Username }}
+
+       {{ up.Password.label }}
+       {{ up.Password }}
+
+       {{ up.ConfirmPassword.label }}
+       {{ up.ConfirmPassword }}
+
+       {{ up.Submit }}
+
+      <!-- We don't need a label for 'Submit' as the button comes with
+           whatever label that you put in 'forms.py' embedded in it. It's
+           a feature of the 'SubmitField' class. -->
+
+       {% if get_flashed_messages() %}
+
+       <!-- The 'get_flashed_messages()' function evidently gets our
+            to be flashed messages. This checks if there is actually something
+            returned by this function. If there is something, the condition is
+            True, else it's False. If it is True, it proceeds to the next step.
+            If it is Flase, nothing happens. We use {# {% statement %} #} syntax
+            for statements.-->
+
+          {% for i in get_flashed_messages() %}
+
+       <!-- As there can be multiple flashed messages sent, they are stored in
+            a list which is returned by this function and looped through here to
+            display them. -->
+
+                {{ i }}
+
+        <!-- Displaying the message/s. -->
+
+          {% endfor %}
+       {% endif %}
+
+       <!-- Ending our 'for' and 'if' blocks. -->
+
 
   </form>
 </body>
