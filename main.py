@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash
+from flask import Flask, render_template, flash, redirect, url_for
 from forms import SignUp, Login
 
                 #Here, we have imported our 'forms.py' module to actually use
@@ -57,7 +57,7 @@ def signup():   #Now, everything that you need to do for that particular
                 #we set on 'forms.py'. It is a function of the 'FlaskForm'
                 #class that we inherited in our 'SignUp' class.
 
-           flash(f'Account for {up.Username.data} has been created.')
+           flash(f'Account for {up.Username.data} has been created. Sign in from here.')
 
                 #The 'flash' function is used to return a string for one
                 #request only i.e. after the string is seen once on a page,
@@ -70,11 +70,15 @@ def signup():   #Now, everything that you need to do for that particular
                 #show the message of success or failure, we want it to be a one
                 #time thing only--thus, the usage of 'flash'.
 
-                #Right now, we have flashed the messages in this path i.e. in
-                #'index.html'. Thus, we haven't redirected the user to any other
-                #path here. But that will change later.
+           return redirect(url_for('login'))
 
-  return render_template('index.html', up=up)
+                #The 'redirect' function is used to redirect the user to a
+                #particular path. The argument is the URL address of the path.
+                #If we don't want to type the whole URL, we can just use the
+                #'url_for' function which builds the URL pertaining to the
+                #function given as argument for us.
+
+  return render_template('signup.html', up=up)
 
                 #Here, we use the 'render_template' function to provide the
                 #name of the html page pertaining to this path that it will
@@ -91,3 +95,10 @@ def signup():   #Now, everything that you need to do for that particular
                 #aid of Jinja. It has its own syntax structure that we must
                 #follow. This is how we are able to use the fields and
                 #such that we declared in 'forms.py' in our html.
+
+@app.route("/login", methods = ['GET', 'POST'])
+def login():
+     log = Login()
+     if log.validate_on_submit():
+         flash(f'You are logged in.')
+     return render_template('login.html', log=log)

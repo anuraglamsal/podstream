@@ -9,7 +9,8 @@
          to specify the path that the form should be submitted to (here, we
          leave it empty because we want to send the submitted data to the same
          path that it was rendered through i.e. the '/' path). We generally
-         use {# "{{ url_for('handle_data') }}" #} to do that by specifying the
+         use {# "{{ url_for('handle_data') }}" #} to do m
+         that by specifying the
          name of the function of the said path in the "url_for('functionname')"
          function.
 
@@ -49,7 +50,23 @@
          that is the syntax that has been set for Jinja to recognize. -->
 
        {{ up.FirstName.label }}
-       {{ up.FirstName }}
+       {% if up.FirstName.errors %}
+
+    <!--- If the validators that we inserted in the 'FirstName' object
+          figure out that some entered data hasn't complied with our condition
+          it stores the breaches of conditions in the 'errors' attribute of
+          the 'StringField' class that we have called here. It is in the form
+          of a tuple as there can be multiple errors. This tuple is iterated
+          through using the for loop below to display all the errors. -->
+
+          {{ up.FirstName }}
+          {% for i in up.FirstName.errors %}
+              {{ i }}
+          {% endfor %}
+       {% else %}
+          {{ up.FirstName }}
+       {% endif %}
+
 
     <!-- As 'FirstName' is an attribute of the 'SignUp' class, we
          call it here by using 'up.FirstName' command where 'up' is the
@@ -66,50 +83,60 @@
     <!-- Doing the same as above for "MiddleName". -->
 
        {{ up.LastName.label }}
-       {{ up.LastName }}
+       {% if up.LastName.errors %}
+          {{ up.LastName }}
+          {% for i in up.LastName.errors %}
+              {{ i }}
+          {% endfor %}
+       {% else %}
+          {{ up.LastName }}
+       {% endif %}
 
        {{ up.email.label }}
-       {{ up.email }}
+       {% if up.email.errors %}
+          {{ up.email }}
+          {% for i in up.email.errors %}
+             {{ i }}
+          {% endfor %}
+       {% else %}
+          {{ up.email }}
+       {% endif %}
 
        {{ up.Username.label }}
-       {{ up.Username }}
+       {% if up.Username.errors %}
+          {{ up.Username }}
+          {% for i in up.Username.errors %}
+             {{ i }}
+          {% endfor %}
+       {% else %}
+          {{ up.Username }}
+       {% endif %}
 
        {{ up.Password.label }}
-       {{ up.Password }}
+       {% if up.Password.errors %}
+          {{ up.Password }}
+          {% for i in up.Password.errors %}
+             {{ i }}
+          {% endfor %}
+       {% else %}
+          {{ up.Password }}
+       {% endif %}
 
        {{ up.ConfirmPassword.label }}
-       {{ up.ConfirmPassword }}
+       {% if up.ConfirmPassword.errors %}
+          {{ up.ConfirmPassword }}
+          {% for i in up.ConfirmPassword.errors %}
+             {{ i }}
+          {% endfor %}
+       {% else %}
+          {{ up.ConfirmPassword }}
+       {% endif %}
 
        {{ up.Submit }}
 
       <!-- We don't need a label for 'Submit' as the button comes with
            whatever label that you put in 'forms.py' embedded in it. It's
            a feature of the 'SubmitField' class. -->
-
-       {% if get_flashed_messages() %}
-
-       <!-- The 'get_flashed_messages()' function evidently gets our
-            to be flashed messages. This checks if there is actually something
-            returned by this function. If there is something, the condition is
-            True, else it's False. If it is True, it proceeds to the next step.
-            If it is Flase, nothing happens. We use {# {% statement %} #} syntax
-            for statements.-->
-
-          {% for i in get_flashed_messages() %}
-
-       <!-- As there can be multiple flashed messages sent, they are stored in
-            a list which is returned by this function and looped through here to
-            display them. -->
-
-                {{ i }}
-
-        <!-- Displaying the message/s. -->
-
-          {% endfor %}
-       {% endif %}
-
-       <!-- Ending our 'for' and 'if' blocks. -->
-
 
   </form>
 </body>

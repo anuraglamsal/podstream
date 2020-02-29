@@ -1,0 +1,62 @@
+<html>
+<head>
+  <title> Log in! </title>
+</head>
+<body>
+  <form action="" method="POST">
+
+       {{ log.hidden_tag() }}
+
+       {{ log.email.label }}
+       {% if log.email.errors %}
+          {{ log.email }}
+          {% for i in log.email.errors %}
+              {{ i }}
+          {% endfor %}
+       {% else %}
+          {{ log.email }}
+       {% endif %}
+
+       {{ log.Password.label }}
+       {% if log.Password.errors %}
+          {{ log.Password }}
+          {% for i in log.Password.errors %}
+             {{ i }}
+          {% endfor %}
+       {% else %}
+          {{ log.Password }}
+       {% endif %}
+
+      {{ log.Remember }}
+      {{ log.Remember.label }}
+
+      {{ log.Submit }}
+
+       {% if get_flashed_messages() %}
+
+       <!-- The 'get_flashed_messages()' function evidently gets our
+            to be flashed messages. This checks if there is actually something
+            returned by this function. If there is something, the condition is
+            True, else it's False. If it is True, it proceeds to the next step.
+            If it is Flase, nothing happens. We use {# {% statement %} #} syntax
+            for statements.-->
+
+          {% for i in get_flashed_messages() %}
+
+       <!-- As there can be multiple flashed messages sent, they are stored in
+            a list/tuple which is returned by this function and looped through
+            here to display them. -->
+
+                {{ i }}
+
+        <!-- Displaying the message/s. -->
+
+          {% endfor %}
+       {% endif %}
+
+       <!-- Ending our 'for' and 'if' blocks. -->
+
+
+  </form>
+</body>
+</html>
