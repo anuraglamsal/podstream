@@ -1,4 +1,5 @@
 from flask import Flask, render_template, flash, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 from forms import SignUp, Login
 
                 #Here, we have imported our 'forms.py' module to actually use
@@ -25,6 +26,47 @@ app.config['SECRET_KEY'] = 'CLFA58C61A'
 
                 #Go to this link for information regarding the use of this
                 #secret key - https://imgur.com/a/t3bnRj5
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+
+                #There are different models that have been made to work with
+                #data. One of them is the 'relational' model. A database created
+                #with the relational model is a relational database. A system
+                #created to "manage" data i.e. create, read, update, delete,
+                #under the relational paradigm is called a 'Relational Database
+                #Management System'. These systems are basically languages that
+                #you use to work with a relational database. One of them is
+                #SQL (Structured Query Language). Just like there are different
+                #frameworks for backend stuff in Python like Django and Flask,
+                #there are different "frameworks" within the SQL paradigm to
+                #work with relational databases. These "frameworks" have their
+                #own pros and cons, just like Django and Flask. One of them is
+                #'sqlite'. From what I've read, sqlite is very good for
+                #databases pertaining to applications that are not used by
+                #many users. But it starts running into problems when the user
+                #number starts to increase. Thus, apparently, it is good to
+                #use during development. And the 'SQLAlchemy' library that we
+                #are using makes it easy to shift between different "frameworks"
+                #,thus, giving us the ability to use different suited "frameworks"
+                #during different steps of development.
+
+                #Here, we are basically configuring a database for our app by
+                #providing the app the URI of the database. If we haven't manually
+                #created one, this creates one for us. Here, praticularly, we
+                #have created a database named 'site.db' which works under the
+                #sqlite "framework".
+
+db = SQLAlchemy(app)
+
+                #Here, we have created an object of the 'SQLAlchemy' class and
+                #have provided our 'app' object as an attribute of this 'db'
+                #object. This basically configures our app such that now, we
+                #can work with data under the relational model, using the
+                #SQL language, within the sqlite "framework" by using the
+                #object-oriented setup put together by the SQLAlchemy library.
+                #We are basically exploiting the object-oriented paradigm to
+                #work with relational databases relatively easily using
+                #SQLAlchemy. 
 
 @app.route("/", methods = ['GET', 'POST'])
 
