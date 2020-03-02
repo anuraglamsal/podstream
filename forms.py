@@ -92,11 +92,12 @@ class SignUp(FlaskForm): #In wtforms, all the magic that gives
                          #validator classes I've used in the import
                          #section of the code.
 
-    MiddleName = StringField('Middle Name (if any)')
+    MiddleName = StringField('Middle Name (if any)', validators=[Length(max=50)])
 
-                         #As there might not be a
-                         #middle name, we are not
-                         #using any validator here.
+                         #As there might not be a middle name,
+                         #data is not compulsarily required. But
+                         #we do specify the maximum length of middle
+                         #name allowed.
 
     LastName = StringField('Last Name', validators=[DataRequired(),
                                                     Length(min=1, max=50)])

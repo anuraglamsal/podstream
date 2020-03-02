@@ -78,7 +78,14 @@
          object. -->
 
        {{ up.MiddleName.label }}
-       {{ up.MiddleName }}
+       {% if up.MiddleName.errors %}
+          {{ up.MiddleName }}
+          {% for i in up.MiddleName.errors %}
+              {{ i }}
+          {% endfor %}
+       {% else %}
+          {{ up.MiddleName }}
+       {% endif %}
 
     <!-- Doing the same as above for "MiddleName". -->
 
