@@ -125,7 +125,29 @@ class User(db.Model):
                 #anyways.
 
             lastname = db.Column(db.String(50), nullable=False)
+            email = db.Column(db.String(100), unique=True, nullable=False)
 
+                #As we want each user to have a unique email associated with
+                #their account, we send the value of the 'unique' attribute to be
+                #'True'. By default it's 'False'. This prevents repetition of
+                #emails in different user data.
+
+           username = db.Column(db.String(20), unique=True, nullable=False)
+           password = db.Column(db.String(60), nullable=False)
+
+                #We set the maximum length of the password field to be '60'
+                #because passwords are stored as hashes in databases for
+                #security purposes. They are converted to hashes using
+                #ideally the latest and greatest hashing algorthims. The reason
+                #of doing so is elaborated in the link below:
+                #https://imgur.com/a/oRtiLDm
+
+                #'Usernames' should be unique for each user to remove general
+                #confusion, prevent identity theft, etc. Thus, this enables
+                #passwords for each user to not be unique as the combination of
+                #username/email and password turns out to be a good login
+                #credential format. But that doesn't get rid of the fact that
+                #passwords should be made super difficult to presume.
 
 @app.route("/", methods = ['GET', 'POST'])
 
