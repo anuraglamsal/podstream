@@ -132,9 +132,9 @@ class User(db.Model):
                 #'True'. By default it's 'False'. This prevents repetition of
                 #emails in different user data.
 
-           username = db.Column(db.String(20), unique=True, nullable=False)
-           password = db.Column(db.String(60), nullable=False)
-
+            username = db.Column(db.String(20), unique=True, nullable=False)
+            password = db.Column(db.String(60), nullable=False)
+ 
                 #We set the maximum length of the password field to be '60'
                 #because passwords are stored as hashes in databases for
                 #security purposes. They are converted to hashes using
