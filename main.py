@@ -1,6 +1,7 @@
 from flask import Flask, render_template, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from forms import SignUp, Login
+from flask_bcrypt import Bcrypt
 
                 #Here, we have imported our 'forms.py' module to actually use
                 #the features of wtforms and the entities initialized in that
@@ -58,15 +59,24 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
 db = SQLAlchemy(app)
 
-                #Here, we have created an object of the 'SQLAlchemy' class and
-                #have provided our 'app' object as an attribute of this 'db'
-                #object. This basically configures our app such that now, we
-                #can work with data under the relational model, using the
-                #SQL language, within the sqlite "framework" by using the
-                #object-oriented setup put together by the SQLAlchemy library.
-                #We are basically exploiting the object-oriented paradigm to
-                #work with relational databases relatively easily using
-                #SQLAlchemy.
+                #Here, we have to realize that all the functionalities of
+                #SQLAlchemy is actually contained in the 'sqlalchemy' library
+                #which is not flask specific. There is a different package that
+                #is installed alongside it called 'flask-sqlalchemy'. This
+                #is flask specific. This package, in some black box way, makes
+                #it relatively hassle-free for the user to use the features of
+                #'sqlalchemy' in flask by exploiting flask's internal structure.
+                #Here, specifically, we create an instance of the 'SQLAlchemy'
+                #class which is a class of the 'flask_sqlalchemy' package. We
+                #also pass our 'app' object as a value of an attribute of the
+                #class. Now this instance--again in some black box way--makes
+                #stuff hassle-free for us. For eg, we don't need to import
+                #any class of 'sqlalchemy' explicitely above. We can directly
+                #use them here.
+
+bcrypt = Bcrypt(app)
+
+                #Same as above.
 
 class User(db.Model):
 
@@ -134,10 +144,10 @@ class User(db.Model):
 
             username = db.Column(db.String(20), unique=True, nullable=False)
             password = db.Column(db.String(60), nullable=False)
- 
+
                 #We set the maximum length of the password field to be '60'
                 #because passwords are stored as hashes in databases for
-                #security purposes. They are converted to hashes using
+                #security purposes. They are converted to hashes usingS
                 #ideally the latest and greatest hashing algorthims. The reason
                 #of doing so is elaborated in the link below:
                 #https://imgur.com/a/oRtiLDm
@@ -179,6 +189,42 @@ def signup():   #Now, everything that you need to do for that particular
                 #entered by the user is valid according to the conditions that
                 #we set on 'forms.py'. It is a function of the 'FlaskForm'
                 #class that we inherited in our 'SignUp' class.
+
+           hashed_password = bcrypt.generate_password_hash(up.Password.data)
+
+                #Here, we are hashing the password that is sent by the user
+                #from the webpage. For that, we use 'generate_password_hash',
+                #which is a function of the 'flask_bcrypt' module which
+                #, in some black box way, communicates with a different function
+                #in the 'bcrypt' module to generate the required password hash.
+                #We store that in a variable for later use.
+
+           user = User(firstname=up.FirstName.data, middlename=up.MiddleName.data,
+                       lastname=up.LastName.data, email=up.email.data,
+                       username=up.Username.data, password=hashed_password)
+
+                #Here, we are creating an instance of the 'User' class that
+                #we created above by providing the data entered by the user to the
+                #respective attributes of the class. We specify the variables
+                #because we are not sending them in order; specifically, we are
+                #skipping over 'id' as it is automatically created internally.
+                #For 'password', we evidently provide the 'hashed_password'
+                #variable.
+
+           db.session.add(user)
+
+                #Analogous to 'git', we stage our instances before committing
+                #them to the databse. This just provides extra degree of freedom
+                #to the user in terms of the order of committing instances. You
+                #only use it when necessary, but it is still good to have the
+                #feature. 'session' is an attribute of the 'SQLAlchemy' class
+                #and 'add' is a function of the 'sqlalchemy' library.
+
+           db.session.commit()
+
+                #This commits our 'user' instance or the data sent by the user
+                #from the webpage to the database. Now that user has the ability
+                #to start a session.
 
            flash(f'Account for {up.Username.data} has been created. Sign in from here.')
 
