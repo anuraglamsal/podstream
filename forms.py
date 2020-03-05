@@ -121,9 +121,7 @@ class SignUp(FlaskForm): #In wtforms, all the magic that gives
                          #Now, the field is suited to
                          #enter passwords.
 
-    ConfirmPassword = PasswordField('Confirm Password',
-                                                  validators=[DataRequired(),
-                                                  Length(min=9, max=20),
+    ConfirmPassword = PasswordField('Confirm Password', validators=[
                                                   EqualTo('Password')])
 
                          #Here, we've used the EqualTo
@@ -141,6 +139,7 @@ class SignUp(FlaskForm): #In wtforms, all the magic that gives
                          #button used to submit the entered
                          #values and make them ready for
                          #validation.
+
 
 class Login(FlaskForm):  #Here, we are creating another class that inherits
                          #from the FlaskForm class imported above for our
