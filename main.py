@@ -52,10 +52,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
                 #during different steps of development.
 
                 #Here, we are basically configuring a database for our app by
-                #providing the app the URI of the database. If we haven't manually
-                #created one, this creates one for us. Here, praticularly, we
-                #have created a database named 'site.db' which works under the
-                #sqlite "framework".
+                #providing the app the URI of the database. In the URI, we first
+                #specify the "framework" or "dialect" of the database as
+                #way to do do things are evidently different for different
+                #"frameworks". Then, we write out the path of the database.
+                #As we want the database to exist in our app folder itself,
+                #":///'nameofthedb'.db" works for that. We haven't created it
+                #yet though, so we must do that first to get stuff actually working.
 
 db = SQLAlchemy(app)
 
