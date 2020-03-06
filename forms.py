@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, ValidationError
 
                          #Used to import classes that provide fields
                          #to do stuff like text boxes, submit buttons,
@@ -44,6 +44,8 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo
                          # the value entered in the field is
                          # equal to the value entered in some
                          # other field.
+
+from models import User
 
 class SignUp(FlaskForm): #In wtforms, all the magic that gives
                          #us the ability to access the data
@@ -140,6 +142,15 @@ class SignUp(FlaskForm): #In wtforms, all the magic that gives
                          #values and make them ready for
                          #validation.
 
+    def validate_Username(self, Username):
+        user = User.query.filter_by(username=Username.data).first()
+        if user:
+            raise ValidationError('The username already exists.')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError('The email already exists.')
 
 class Login(FlaskForm):  #Here, we are creating another class that inherits
                          #from the FlaskForm class imported above for our
