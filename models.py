@@ -1,6 +1,11 @@
-from main import db
+from main import db, login_manager
+from flask_login import UserMixin
 
-class User(db.Model):
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+class User(db.Model, UserMixin):
 
                 #Here, we create a class that acts as a "model" of our database
                 #i.e. we specify the types of data that we can add on particular

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager, login_user, logout_user, current_user
 
                 #Here, we have imported our 'forms.py' module to actually use
                 #the features of wtforms and the entities initialized in that
@@ -76,8 +77,34 @@ db = SQLAlchemy(app)
                 #any class of 'sqlalchemy' explicitely above. We can directly
                 #use them here.
 
+login_manager = LoginManager(app)
+
+                 #Same as 'db'.
+
 from forms import SignUp, Login
 from models import User
+
+                #These imports are here because of a circular-import problem.
+                #When the main script is run, all the modules imported in it
+                #are run too until the entities that we particulary need to
+                #extract from those modules are found.
+
+                #As our 'User' model was initially in the main script, when it
+                #was called to 'forms' for validation purposes, it would run
+                #the main script again, which would run the 'forms' module
+                #again and so on--thus, causing the circular-import problem.
+                #To solve that, I tried to create a separate module for
+                #models. But even then the problem didn't go away as the
+                #model classes require the 'db' object. The 'app' instance
+                #is passed a value an attribute of the 'SQLAlchemy' class while
+                #creating the 'db' object, and the 'app' instance must be
+                #created in the main script which is a 'Flask' compulsion of
+                #sorts (it's probably not a compulsion but it would certainly
+                #create a hassle). Bringing these imports down solved the problem
+                #as when the 'models' module is run, it only runs the 'main'
+                #module until the point where it finds the 'db' object. Thus,
+                #as the 'db' object is created above these imports, the
+                #problem goes away.
 
 bcrypt = Bcrypt(app)
 
@@ -191,7 +218,25 @@ def signup():   #Now, everything that you need to do for that particular
 
 @app.route("/login", methods = ['GET', 'POST'])
 def login():
+     if current_user.is_authenticated:
+         return redirect(url_for('signup'))
      log = Login()
      if log.validate_on_submit():
-         flash(f'You are logged in.')
+         user = User.query.filter_by(email=log.email.data).first()
+         if user and bcrypt.check_password_hash(user.password, log.Password.data):
+            login_user(user)
+            return redirect(url_for('signup'))
+         else:
+            flash('''The user doesn't exist. Check your credentials or sign up by
+                     clicking on 'Sign Up'.''')
      return render_template('login.html', log=log)
+
+@app.route("/logout")
+def logout():
+     if current_user.is_authenticated:
+          logout_user()
+          flash('You have been logged out.')
+          return redirect(url_for('login'))
+     else:
+          flash('You need to log in first to log out.')
+          return redirect(url_for('login'))

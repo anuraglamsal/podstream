@@ -152,6 +152,9 @@ class SignUp(FlaskForm): #In wtforms, all the magic that gives
         if user:
             raise ValidationError('The email already exists.')
 
+                         #Information about these functions are in this link:
+                         #imgur.com/a/3582lY4
+
 class Login(FlaskForm):  #Here, we are creating another class that inherits
                          #from the FlaskForm class imported above for our
                          #login form. A login form typically requires a Email
