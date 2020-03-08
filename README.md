@@ -6,6 +6,10 @@ Step 1: Build a user authentication system that works without caring for the lay
    
    * Learn how to validate in the main module and show validation errors on the html page. 
    
-   * Learn how to save user information and then retrieve it for login. *(Learn how to use an ORM library like SQLAlchmey to make things        relatively easy when it comes to working with database.)*
+   * Learn how to save user information and retrieve them. *(Learn how to use an ORM library like SQLAlchmey.)*
+  
+   * Learn how to manage sessions.
+   
+03/08/2020 - Step 1 is completed.
 
 Step 2: After the system is fully foolproof, do frontend stuff (i.e. first learn and then do). 
