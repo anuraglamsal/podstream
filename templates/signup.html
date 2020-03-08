@@ -5,23 +5,28 @@
 <body>
  {% if current_user.is_authenticated %}
     <h1> The user '{{ current_user.username }}' is logged in! </h1> <br>
-         Click <a href="{{ url_for('logout') }}">here</a> to log out.
+         Click <a href="{{ url_for('logout') }}">here</a> to log out.<br>
 
-<!-- An anchor tag basically sets a hyperlink to the required text that is
-    written inside it. If you imagine a website to be a moving ship, this
-    tag gives the website the ability to anchor at a particular spot, and
-    that spot is the place taken by the hyperlink. That probably doesn't make
-    sense, but it doesn't matter. These words were set-up during their
-    initiation, but because of developments that follow, their functionalities
-    stop making sense relative to their placeholder. It's an age old
-    problem with semantics. The basic thing to understand is that an
-    anchor tag sets up a hyperlink. The hyperlink is given to the
-    'href' method. 'href' stands for 'hypertext reference', which basically
-    means that the stuff that you give to it references to a particular
-    'hypertext' or html page. Instead of giving a whole link, using 'url_for'
-    is better as we may change the names of the path later because of
-    necessity, but changing the name of the function pertaining to that
-    path is rarely a necessity. Thus, it's good practice to use 'url_for'.-->
+   <!-- An anchor tag basically sets a hyperlink to the required text that is
+        written inside it. If you imagine a website to be a moving ship, this
+        tag gives the website the ability to anchor at a particular spot, and
+        that spot is the place taken by the hyperlink. That probably doesn't make
+        sense, but it doesn't matter. These words were set-up during their
+        initiation, but because of developments that follow, their functionalities
+        stop making sense relative to their placeholder. It's an age old
+        problem with semantics. The basic thing to understand is that an
+        anchor tag sets up a hyperlink. The hyperlink is given to the
+        'href' method. 'href' stands for 'hypertext reference', which basically
+        means that the stuff that you give to it references to a particular
+        'hypertext' or html page. Instead of giving a whole link, using 'url_for'
+        is better as we may change the names of the path later because of
+        necessity, but changing the name of the function pertaining to that
+        path is rarely a necessity. Thus, it's good practice to use 'url_for'.-->
+
+     <!-- Refer to 'imgur.com/a/Q8X0oLa' for all the mess concerning
+         'current_user'. Basically, the code within this block is executed
+          if there is a user in session. -->
+
  {% else %}
   <form action="" method="POST">
 

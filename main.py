@@ -79,10 +79,12 @@ db = SQLAlchemy(app)
 
 login_manager = LoginManager(app)
 
-                 #Same as 'db'.
+                #Refer to this for this mess:
+                #imgur.com/a/Q8X0oLa
 
 from forms import SignUp, Login
 from models import User
+
 
                 #These imports are here because of a circular-import problem.
                 #When the main script is run, all the modules imported in it
@@ -105,6 +107,13 @@ from models import User
                 #module until the point where it finds the 'db' object. Thus,
                 #as the 'db' object is created above these imports, the
                 #problem goes away.
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+                #Refer to this for this mess:
+                #imgur.com/a/Q8X0oLa
 
 bcrypt = Bcrypt(app)
 
@@ -220,11 +229,19 @@ def signup():   #Now, everything that you need to do for that particular
 def login():
      if current_user.is_authenticated:
          return redirect(url_for('signup'))
+
+                #Refer to this for this mess:
+                #imgur.com/a/Q8X0oLa
+
      log = Login()
      if log.validate_on_submit():
          user = User.query.filter_by(email=log.email.data).first()
          if user and bcrypt.check_password_hash(user.password, log.Password.data):
             login_user(user)
+
+                #Refer to this for this mess:
+                #imgur.com/a/Q8X0oLa
+
             return redirect(url_for('signup'))
          else:
             flash('''The user doesn't exist. Check your credentials or sign up by
