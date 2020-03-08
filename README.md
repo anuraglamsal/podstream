@@ -10,6 +10,6 @@ Step 1: Build a user authentication system that works without caring for the lay
   
    * Learn how to manage sessions.
    
-03/08/2020 - Step 1 is completed.
+03/08/2020 - Completed Step 1.
 
 Step 2: After the system is fully foolproof, do frontend stuff (i.e. first learn and then do). 
