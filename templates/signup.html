@@ -1,176 +1,205 @@
 <html>
 <head>
-  <title> Sign Up! </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title> PodStream </title>
 </head>
 <body>
- {% if current_user.is_authenticated %}
-    <h1> The user '{{ current_user.username }}' is logged in! </h1> <br>
-         Click <a href="{{ url_for('logout') }}">here</a> to log out.<br>
+     {% if current_user.is_authenticated %}
+          <h1> The user '{{ current_user.username }}' is logged in! </h1><br>
+          Click <a href="{{ url_for('logout') }}">here</a> to log out.<br>
+<!--
+An anchor tag basically sets a hyperlink to the required text that is
+written inside it. If you imagine a website to be a moving ship, this
+tag gives the website the ability to anchor at a particular spot, and
+that spot is the place taken by the hyperlink. That probably doesn't make
+sense, but it doesn't matter. These words were set-up during their
+initiation, but because of developments that follow, their functionalities
+stop making sense relative to their placeholder. It's an age old
+problem with semantics. The basic thing to understand is that an
+anchor tag sets up a hyperlink. The hyperlink is given to the
+'href' method. 'href' stands for 'hypertext reference', which basically
+means that the stuff that you give to it references to a particular
+'hypertext' or html page. Instead of giving a whole link, using 'url_for'
+is better as we may change the names of the path later because of
+necessity, but changing the name of the function pertaining to that
+path is rarely a necessity. Thus, it's good practice to use 'url_for'.
 
-   <!-- An anchor tag basically sets a hyperlink to the required text that is
-        written inside it. If you imagine a website to be a moving ship, this
-        tag gives the website the ability to anchor at a particular spot, and
-        that spot is the place taken by the hyperlink. That probably doesn't make
-        sense, but it doesn't matter. These words were set-up during their
-        initiation, but because of developments that follow, their functionalities
-        stop making sense relative to their placeholder. It's an age old
-        problem with semantics. The basic thing to understand is that an
-        anchor tag sets up a hyperlink. The hyperlink is given to the
-        'href' method. 'href' stands for 'hypertext reference', which basically
-        means that the stuff that you give to it references to a particular
-        'hypertext' or html page. Instead of giving a whole link, using 'url_for'
-        is better as we may change the names of the path later because of
-        necessity, but changing the name of the function pertaining to that
-        path is rarely a necessity. Thus, it's good practice to use 'url_for'.-->
+Refer to 'imgur.com/a/Q8X0oLa' for all the mess concerning
+'current_user'. Basically, the code within this block is executed
+if there is a user in session.
+-->
+     {% else %}
+          <div class = "container d-flex h-100">
+               <div class = "row justify-content-center align-self-center">
+                    <div class="col my-auto">
+                         <h3 class="text-info">Degree of freedom galore</h3>
+                         <b class="text-secondary">PodStream </b><span class="text-muted">is packed
+                         with an opus of functionality, and you've got an enormous
+                         degree of freedom to customize according to your liking.
+                         Make your podcast listening experience your own (if you want to that is).</span>
+                    </div>
+                    <div class = "col offset-md-2">
+                         <form action="" method="POST">
+<!--
+The form tag initializes a form by using the "action" attribute
+to specify the path that the form should be submitted to (here, we
+leave it empty because we want to send the submitted data to the same
+path that it was rendered through i.e. the '/' path). We generally
+use {# "{{ url_for('handle_data') }}" #} to do that by specifying the
+name of the function of the said path in the "url_for('functionname')"
+function.
 
-     <!-- Refer to 'imgur.com/a/Q8X0oLa' for all the mess concerning
-         'current_user'. Basically, the code within this block is executed
-          if there is a user in session. -->
+P.S. Use {# comment #} to comment Jinja commands. Jinja reads
+stuff inside html comments for some reasons if it is syntactically
+a Jinja command.
 
- {% else %}
-  <form action="" method="POST">
+Along with "action", the "method" attribute is used to specify the
+type of http request that is to be made to the server. For example,
+search bars aren't as confidential as password bars. Even if the
+information that we type in the search bar is relatively explicitely
+seen--for example in the url bar--when a request is made, it's not that
+big of a deal compared to passwords. Thus, for cases like search bars,
+we tend to use the "GET" method as it has its own little perks that
+are useful that we wouldn't get with other methods. Now, if we are
+working with a form that has a password bar, we evidently don't want
+our password to be relatively explicitely seen like in the "GET" method
+when making a request. Thus, for that, the "POST" method is used.
 
-    <!-- The form tag initializes a form by using the "action" attribute
-         to specify the path that the form should be submitted to (here, we
-         leave it empty because we want to send the submitted data to the same
-         path that it was rendered through i.e. the '/' path). We generally
-         use {# "{{ url_for('handle_data') }}" #} to do m
-         that by specifying the
-         name of the function of the said path in the "url_for('functionname')"
-         function.
+In the usage of "GET", there is an implication that the request has
+been made to retrieve a page--like entering something in the search bar
+of a website and submitting it to get the search-specific page. In
+"POST", there is an implication that some sort of confidential
+information has been sent to the server to store or to tally with some
+already stored information for some purpose.
 
-         P.S. Use {# comment #} to comment Jinja commands. Jinja reads
-         stuff inside html comments for some reasons if it is syntactically
-         a Jinja command.
+Go to this link for a definitive guide :
+https://blog.teamtreehouse.com/the-definitive-guide-to-get-vs-post
+-->
+                              {{ up.hidden_tag() }}
+<!--
+This is used to add a csrf token to the form. Watch this video
+to understand what a csrf token is:
+https://www.youtube.com/watch?v=vRBihr41JTo
 
-         Along with "action", the "method" attribute is used to specify the
-         type of http request that is to be made to the server. For example,
-         search bars aren't as confidential as password bars. Even if the
-         information that we type in the search bar is relatively explicitely
-         seen--for example in the url bar--when a request is made, it's not that
-         big of a deal compared to passwords. Thus, for cases like search bars,
-         we tend to use the "GET" method as it has its own little perks that
-         are useful that we wouldn't get with other methods. Now, if we are
-         working with a form that has a password bar, we evidently don't want
-         our password to be relatively explicitely seen like in the "GET" method
-         when making a request. Thus, for that, the "POST" method is used.
-
-         In the usage of "GET", there is an implication that the request has
-         been made to retrieve a page--like entering something in the search bar
-         of a website and submitting it to get the search-specific page. In
-         "POST", there is an implication that some sort of confidential
-         information has been sent to the server to store or to tally with some
-         already stored information for some purpose.
-
-         Go to this link for a definitive guide :
-         https://blog.teamtreehouse.com/the-definitive-guide-to-get-vs-post -->
-
-       {{ up.hidden_tag() }}
-
-    <!-- This is used to add a csrf token to the form. Watch this video
-         to understand what a csrf token is:
-         https://www.youtube.com/watch?v=vRBihr41JTo
-
-         Here, we use double curly brackets to enclose this function as
-         that is the syntax that has been set for Jinja to recognize. -->
-
-       {{ up.FirstName.label }}
-       {% if up.FirstName.errors %}
-
-    <!--- If the validators that we inserted in the 'FirstName' object
-          figure out that some entered data hasn't complied with our condition
-          it stores the breaches of conditions in the 'errors' attribute of
-          the 'StringField' class that we have called here. It is in the form
-          of a tuple as there can be multiple errors. This tuple is iterated
-          through using the for loop below to display all the errors. -->
-
-          {{ up.FirstName }}
-          {% for i in up.FirstName.errors %}
-              {{ i }}
-          {% endfor %}
-       {% else %}
-          {{ up.FirstName }}
-       {% endif %}
-
-
-    <!-- As 'FirstName' is an attribute of the 'SignUp' class, we
-         call it here by using 'up.FirstName' command where 'up' is the
-         object that we created back in 'main.py' of the 'SignUp' class. As
-        'FirstName' itself is an object of the 'StringField' class, we have
-         basically called our desired field here. 'up.FirstName.label' brings
-         out the label that we sent as a value of an attribute of the
-         'StringField' class back in 'main.py' pertaining to our 'FirstName'
-         object. -->
-
-       {{ up.MiddleName.label }}
-       {% if up.MiddleName.errors %}
-          {{ up.MiddleName }}
-          {% for i in up.MiddleName.errors %}
-              {{ i }}
-          {% endfor %}
-       {% else %}
-          {{ up.MiddleName }}
-       {% endif %}
-
-    <!-- Doing the same as above for "MiddleName". -->
-
-       {{ up.LastName.label }}
-       {% if up.LastName.errors %}
-          {{ up.LastName }}
-          {% for i in up.LastName.errors %}
-              {{ i }}
-          {% endfor %}
-       {% else %}
-          {{ up.LastName }}
-       {% endif %}
-
-       {{ up.email.label }}
-       {% if up.email.errors %}
-          {{ up.email }}
-          {% for i in up.email.errors %}
-             {{ i }}
-          {% endfor %}
-       {% else %}
-          {{ up.email }}
-       {% endif %}
-
-       {{ up.Username.label }}
-       {% if up.Username.errors %}
-          {{ up.Username }}
-          {% for i in up.Username.errors %}
-             {{ i }}
-          {% endfor %}
-       {% else %}
-          {{ up.Username }}
-       {% endif %}
-
-       {{ up.Password.label }}
-       {% if up.Password.errors %}
-          {{ up.Password }}
-          {% for i in up.Password.errors %}
-             {{ i }}
-          {% endfor %}
-       {% else %}
-          {{ up.Password }}
-       {% endif %}
-
-       {{ up.ConfirmPassword.label }}
-       {% if up.ConfirmPassword.errors %}
-          {{ up.ConfirmPassword }}
-          {% for i in up.ConfirmPassword.errors %}
-             {{ i }}
-          {% endfor %}
-       {% else %}
-          {{ up.ConfirmPassword }}
-       {% endif %}
-
-       {{ up.Submit }}
-
-      <!-- We don't need a label for 'Submit' as the button comes with
-           whatever label that you put in 'forms.py' embedded in it. It's
-           a feature of the 'SubmitField' class. -->
-
-  </form>
- {% endif %}
+Here, we use double curly brackets to enclose this function as
+that is the syntax that has been set for Jinja to recognize.
+-->
+                              <h1>Join PodStream!
+                              <h6 class="text-muted">Already have an account? <a href=" {{ url_for('login') }} ">Login</a></h6>
+                              </h1><br>
+                              <div class="form-group">
+                                   {{ up.FirstName.label }}
+                                   {% if up.FirstName.errors %}
+<!---
+If the validators that we inserted in the 'FirstName' object
+figure out that some entered data hasn't complied with our condition
+it stores the breaches of conditions in the 'errors' attribute of
+the 'StringField' class that we have called here. It is in the form
+of a tuple as there can be multiple errors. This tuple is iterated
+through using the for loop below to display all the errors.
+-->
+                                        {{ up.FirstName(class="form-control") }}
+                                        {% for i in up.FirstName.errors %}
+                                             {{ i }}
+                                        {% endfor %}
+                                   {% else %}
+                                        {{ up.FirstName(class="form-control") }}
+                                   {% endif %}
+                              </div>
+<!--
+As 'FirstName' is an attribute of the 'SignUp' class, we
+call it here by using 'up.FirstName' command where 'up' is the
+object that we created back in 'main.py' of the 'SignUp' class. As
+'FirstName' itself is an object of the 'StringField' class, we have
+basically called our desired field here. 'up.FirstName.label' brings
+out the label that we sent as a value of an attribute of the
+'StringField' class back in 'main.py' pertaining to our 'FirstName'
+object.
+-->
+                              <div class="form-group">
+                                   {{ up.MiddleName.label }}
+                                   {% if up.MiddleName.errors %}
+                                        {{ up.MiddleName(class="form-control") }}
+                                        {% for i in up.MiddleName.errors %}
+                                             {{ i }}
+                                        {% endfor %}
+                                   {% else %}
+                                        {{ up.MiddleName(class="form-control") }}
+                                   {% endif %}
+                              </div>
+<!--
+Doing the same as above for "MiddleName".
+-->
+                              <div class="form-group">
+                                   {{ up.LastName.label }}
+                                   {% if up.LastName.errors %}
+                                        {{ up.LastName(class="form-control") }}
+                                        {% for i in up.LastName.errors %}
+                                             {{ i }}
+                                        {% endfor %}
+                                   {% else %}
+                                        {{ up.LastName(class="form-control") }}
+                                   {% endif %}
+                              </div>
+                              <div class="form-group">
+                                   {{ up.email.label }}
+                                   {% if up.email.errors %}
+                                        {{ up.email(class="form-control") }}
+                                        {% for i in up.email.errors %}
+                                             {{ i }}
+                                        {% endfor %}
+                                   {% else %}
+                                        {{ up.email(class="form-control") }}
+                                   {% endif %}
+                              </div>
+                              <div class="form-group">
+                                   {{ up.Username.label }}
+                                   {% if up.Username.errors %}
+                                        {{ up.Username(class="form-control") }}
+                                        {% for i in up.Username.errors %}
+                                             {{ i }}
+                                        {% endfor %}
+                                   {% else %}
+                                        {{ up.Username(class="form-control") }}
+                                   {% endif %}
+                              </div>
+                              <div class="form-row">
+                                   <div class="form-group col-md-6">
+                                        {{ up.Password.label }}
+                                        {% if up.Password.errors %}
+                                             {{ up.Password(class="form-control") }}
+                                             {% for i in up.Password.errors %}
+                                                  {{ i }}
+                                             {% endfor %}
+                                        {% else %}
+                                             {{ up.Password(class="form-control") }}
+                                        {% endif %}
+                                   </div>
+                                   <div class="form-group col-md-6">
+                                        {{ up.ConfirmPassword.label }}
+                                        {% if up.ConfirmPassword.errors %}
+                                             {{ up.ConfirmPassword(class="form-control") }}
+                                             {% for i in up.ConfirmPassword.errors %}
+                                                  {{ i }}
+                                             {% endfor %}
+                                        {% else %}
+                                             {{ up.ConfirmPassword(class="form-control") }}
+                                        {% endif %}
+                                   </div>
+                              </div><br>
+                              {{ up.Submit(class="btn btn-outline-info btn-lg btn-block") }}
+<!--
+We don't need a label for 'Submit' as the button comes with
+whatever label that you put in 'forms.py' embedded in it. It's
+a feature of the 'SubmitField' class.
+-->
+                         </form>
+                    </div>
+               </div>
+          </div>
+     {% endif %}
 </body>
 </html>
